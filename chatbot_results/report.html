@@ -1,0 +1,248 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Chatbot Test Report with AI Analysis</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                    background: #f5f5f5;
+                }
+                .header {
+                    background: #662d91;
+                    color: white;
+                    padding: 20px;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    background: white;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                th {
+                    background: #662d91;
+                    color: white;
+                    padding: 12px;
+                    text-align: left;
+                    position: sticky;
+                    top: 0;
+                }
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                    vertical-align: top;
+                }
+                tr:hover {
+                    background: #f9f9f9;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🤖 Kitsap Credit Union Chatbot Test Report</h1>
+                <p>Test Run: 2026-01-11T11:35:25.605416</p>
+                <p>Total Questions: 10</p>
+                <p>AI Analysis: Enabled ✓</p>
+            </div>
+            
+            
+            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                <h3 style="margin-top: 0;">🤖 AI Analysis Summary</h3>
+                <p><strong>10</strong> responses need editing</p>
+                <p><strong>4</strong> responses have relevance score below 70</p>
+            </div>
+            
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Question</th>
+                        <th>Response</th>
+                        <th>Keyword Match</th>
+                        
+            <th>AI Relevance</th>
+            <th>AI Verdict</th>
+            <th>Issues Found</th>
+            <th>Recommendations</th>
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <tr>
+                <td>Q001</td>
+                <td>rates</td>
+                <td>What are your current mortgage rates?</td>
+                <td>Thank you for your question. I am unable to provide an answer to your question at this time. For specific details about our current mortgage rates, we recommend contacting our member service team dire...</td>
+                <td style="text-align: center;">⚠️ 50% (2/4)</td>
+                
+                    <td style="text-align: center; background: #f44336; color: white; font-weight: bold;">20</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Does not answer the question directly<br>Missing all expected keywords (mortgage, rate, APR, %)<br>Provides no actual rate information<br>Deflects to human contact without offering any preliminary information<br>Response is generic and unhelpful for a common banking inquiry</td>
+                    <td style="font-size: 0.9em;">Program the chatbot to provide current rate ranges or a link to the rates page<br>Include a disclaimer that rates vary based on credit profile and loan specifics<br>Offer to connect the user to a mortgage specialist while providing basic rate context<br>Add a follow-up question to understand if the user wants purchase, refinance, or other mortgage types<br>Ensure the response includes at least some of the expected keywords to show relevance</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q002</td>
+                <td>accounts</td>
+                <td>How do I open a checking account?</td>
+                <td>You can open a checking account with Kitsap Credit Union either online or in person. Here's how:
+
+Online:
+1. Log into your Online Banking account.
+2. Select the "Open New Account" tab.
+3. Click "Check...</td>
+                <td style="text-align: center;">⚠️ 75% (3/4)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">85</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Assumes user already has online banking access before explaining how non-members can apply online<br>Does not explicitly mention that non-members can apply online (only mentions what information they need)<br>References external links (1, 2) without context or explanation<br>Could better structure the distinction between member vs. non-member application processes</td>
+                    <td style="font-size: 0.9em;">Restructure to clearly separate 'For Current Members' and 'For New Members' sections<br>Explicitly state that non-members can apply online through the membership application process<br>Remove or properly integrate the numbered references (1, 2) - either embed the links or explain what they reference<br>Consider adding a brief mention of required documentation for in-person applications as well</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q003</td>
+                <td>locations</td>
+                <td>What are your branch hours?</td>
+                <td>Our branch hours vary by location:
+
+- Silverdale Highlands:  
+  Monday – Thursday: 9:00 AM – 5:00 PM  
+  Friday: 9:00 AM – 6:00 PM  
+  Saturday: 9:00 AM – 1:00 PM  
+
+- Bremerton Drive-Up:  
+  Monday –...</td>
+                <td style="text-align: center;">⚠️ 75% (3/4)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">85</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Missing comprehensive branch list<br>No mention of holiday hours or exceptions<br>Unclear if hours are current or seasonal<br>Response only covers two specific locations when question asks about general branch hours</td>
+                    <td style="font-size: 0.9em;">Include a link to a complete branch hours page on KCU website<br>Add a disclaimer about holiday hours and schedule changes<br>Specify if these are standard hours or include seasonal variations<br>Consider adding 'For all branch locations and hours, visit our website at [URL]'</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q004</td>
+                <td>loans</td>
+                <td>How do I apply for a personal loan?</td>
+                <td>Applying for a loan with Kitsap Credit Union is straightforward. You can apply online by clicking the "Apply Now" button on our website. Please click on the link below for the type of loan you would l...</td>
+                <td style="text-align: center;">⚠️ 50% (2/4)</td>
+                
+                    <td style="text-align: center; background: #ff9800; color: white; font-weight: bold;">60</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Missing specific 'personal loan' application link<br>No mention of alternative application methods (phone, branch)<br>Response is generic rather than specific to personal loans<br>No information about eligibility requirements or documentation needed<br>No clear next steps after clicking 'Apply Now'</td>
+                    <td style="font-size: 0.9em;">Include a direct link to the personal loan application page<br>Mention alternative application methods: phone, in-branch, or online chat<br>Add brief eligibility information (credit score, income requirements)<br>Include expected timeline for approval decision<br>Provide contact information for loan specialists if users have questions</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q005</td>
+                <td>account_info</td>
+                <td>What is your routing number?</td>
+                <td>The routing number for Kitsap Credit Union is 325180223....</td>
+                <td style="text-align: center;">⚠️ 67% (2/3)</td>
+                
+                    <td style="text-align: center; background: #f44336; color: white; font-weight: bold;">0</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Incorrect routing number provided<br>Response contradicts expected keywords<br>Outdated or inaccurate information<br>Fundamental factual error</td>
+                    <td style="font-size: 0.9em;">Immediately update the routing number to 061092085<br>Verify all routing number information in the knowledge base<br>Implement a validation process for critical financial data<br>Add context about routing number usage (wire transfers vs. ACH)</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q006</td>
+                <td>digital_banking</td>
+                <td>How do I reset my online banking password?</td>
+                <td>If you forgot your password, follow the steps below to retrieve it:
+* Navigate to the Online Banking Login page
+* Click “Forgot your Password / Username?”
+If you are having trouble on your Mobile App ...</td>
+                <td style="text-align: center;">⚠️ 75% (3/4)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">85</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Missing direct URL or link to the Online Banking Login page<br>Assumes user knows where to find the login page<br>No mention of password requirements or reset confirmation process<br>Slightly confusing mix of password reset and username recovery</td>
+                    <td style="font-size: 0.9em;">Include the direct URL to the login page (e.g., https://online.kitsapcu.org)<br>Clarify that the process is specifically for password reset (not username recovery) unless both are handled together<br>Add a note about password requirements (length, special characters) if applicable<br>Consider adding estimated time for reset completion or next steps after clicking the link</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q007</td>
+                <td>products</td>
+                <td>Do you offer credit cards?</td>
+                <td>Hey there! At Kitsap Credit Union, we offer several Visa credit cards with different rates and benefits. Listed below are links to the rates....</td>
+                <td style="text-align: center;">⚠️ 75% (3/4)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">85</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Missing Mastercard mention despite being an expected keyword<br>Response lacks completeness - mentions 'different rates and benefits' but doesn't provide any examples or details<br>No direct links provided despite saying 'listed below are links'<br>Could be more engaging and informative about the benefits</td>
+                    <td style="font-size: 0.9em;">Explicitly mention both Visa and Mastercard options if available, or clarify if only Visa is offered<br>Include brief examples of key benefits (cash back, low rates, rewards, etc.)<br>Either embed actual links or rephrase to avoid promising links that aren't delivered<br>Add a call-to-action like 'Would you like to learn more about our specific credit card options?'</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q008</td>
+                <td>rates</td>
+                <td>What are your auto loan rates?</td>
+                <td>Our auto loan rates are as follows:
+
+New Auto (5 model years and newer):
+- 5 Years / 60 Months: 6.39% APR
+- 6 Years / 72 Months: 6.69% APR
+- 7 Years / 84 Months: 6.94% APR
+
+Used Auto:
+- 5 Years / 60 M...</td>
+                <td style="text-align: center;">⚠️ 80% (4/5)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">85</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Missing rate for shorter loan terms (e.g., 36 or 48 months)<br>No disclaimer about rates being subject to change or based on creditworthiness<br>Unclear formatting with '1 2 1' at the end<br>No mention of whether rates are current or as of a specific date<br>No information about how to apply or get a personalized rate</td>
+                    <td style="font-size: 0.9em;">Add a disclaimer that rates are subject to change and based on credit qualifications<br>Include shorter loan terms (36-48 months) which are common for auto loans<br>Remove the confusing '1 2 1' formatting at the end<br>Add date stamp or 'current as of' information<br>Include a call-to-action like 'Apply online' or 'Contact us for personalized rates'</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q009</td>
+                <td>digital_banking</td>
+                <td>How do I deposit a check using mobile?</td>
+                <td>To deposit a check using the Kitsap Credit Union mobile app, follow these steps:
+
+1. Open the Kitsap Credit Union app and select “Check Deposit.”
+2. Choose the account you want to deposit the check in...</td>
+                <td style="text-align: center;">✓ 100% (4/4)</td>
+                
+                    <td style="text-align: center; background: #4CAF50; color: white; font-weight: bold;">95</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">Contains extraneous footer/duplicate content (the '1 2 1' and link text at the end)<br>Missing information about deposit limits or hold times<br>No mention of what happens after submission (confirmation, processing time)</td>
+                    <td style="font-size: 0.9em;">Remove the duplicate footer content at the end of the response<br>Add a brief note about typical mobile deposit limits and when funds become available<br>Include a final step about checking for a confirmation email or notification<br>Consider adding a troubleshooting tip about lighting/background for check photos</td>
+                    
+            </tr>
+            
+            <tr>
+                <td>Q010</td>
+                <td>fees</td>
+                <td>What are your overdraft fees?</td>
+                <td>Sure, listed below is a link to our service fees:...</td>
+                <td style="text-align: center;">⚠️ 33% (1/3)</td>
+                
+                    <td style="text-align: center; background: #f44336; color: white; font-weight: bold;">20</td>
+                    <td style="text-align: center;"><span style="color: #f44336; font-weight: bold;">⚠️ NEEDS EDIT</span></td>
+                    <td style="font-size: 0.9em;">No direct answer to the question about overdraft fees<br>Missing all expected keywords (overdraft, fee, charge)<br>Provides only a link without any contextual information<br>Requires user to navigate away for basic information<br>Does not acknowledge the specific question asked</td>
+                    <td style="font-size: 0.9em;">Directly state the overdraft fee amount(s) in the response<br>Include the keywords 'overdraft', 'fee', and 'charge' in the answer<br>Provide a brief summary of overdraft policies before linking to details<br>Consider adding: 'Our overdraft fee is $X per occurrence. For complete details on our overdraft policies, please visit our service fees page.'<br>Ensure the chatbot can answer basic fee questions without requiring external navigation</td>
+                    
+            </tr>
+            
+                </tbody>
+            </table>
+        </body>
+        </html>
+        
