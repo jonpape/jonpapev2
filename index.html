@@ -1,314 +1,1105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8" />
-  <title>Jonathan Pape — Web Design, Development, and Marketing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <meta name="description" content="Jonathan Pape is a creative technologist based near Seattle, WA with expertise in paid media, data engineering, and generative art.">
-  <meta name="keywords" content="Jonathan Pape, creative technologist, paid media, data engineering, generative art">
+  <title>Jonathan Pape: Digital Marketing Director &amp; Creative Technologist</title>
+  <meta name="description" content="Jonathan Pape is a digital marketing director and creative technologist near Seattle, WA, working across growth marketing, web analytics, and full-stack side projects.">
   <meta name="author" content="Jonathan Pape">
+  <meta name="theme-color" content="#F3F3F1">
+  <link rel="canonical" href="https://jonpape.com/">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jonathan Pape: Digital Marketing Director &amp; Creative Technologist">
+  <meta property="og:description" content="Growth marketing, web analytics, and the web apps I build on the side.">
+  <meta property="og:url" content="https://jonpape.com/">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+
+  <script>document.documentElement.className = 'js';</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    /* =====================================================
+       8. Design tokens
+       ===================================================== */
+    :root {
+      --paper:        #F3F3F1;
+      --white:        #FFFFFF;
+      --hw-light:     #E6E6E3;
+      --hw-mid:       #C9C8C4;
+      --hw-grey:      #A3A29D;
+      --graphite:     #5C5B55;
+      --ink:          #1C1C1A;
+      --black:        #0E0E0D;
+      --signal:       #E8561E;
+      --signal-text:  #B8401A;
+      --signal-glow:  rgba(232, 86, 30, 0.6);
+
+      --shadow-soft:  0 10px 20px rgba(0, 0, 0, 0.08);
+      --shadow-knob:  0 8px 14px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+      --brushed:      linear-gradient(180deg, #FFFFFF 0%, #E6E6E3 50%, #D6D5D1 100%);
+
+      --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --text-xl:      clamp(3.5rem, 9vw, 8rem);
+      --text-l:       3rem;
+      --text-m:       2rem;
+      --text-title:   1.5rem;
+      --text-lead:    1.25rem;
+      --text-body:    1rem;
+      --text-label:   0.6875rem;
+      --text-plate:   0.75rem;
+
+      --grid-gutter:  24px;
+      --grid-max:     1280px;
+      --margin-page:  48px;
+      --panel-pad:    64px;
+
+      --radius-key:   4px;
+      --radius-tile:  16px;
+
+      --ease-out:     cubic-bezier(0.2, 0.7, 0.2, 1);
+      --dur-control:  120ms;
+
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    body, html {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow-x: hidden;
-      touch-action: none;
+    /* =====================================================
+       Base
+       ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 var(--text-body)/1.6 var(--font-display);
+      font-stretch: 100%;
+      -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; }
+    svg { display: block; }
+    ul, ol { list-style: none; }
+    p { max-width: 62ch; }
+    button { font: inherit; color: inherit; background: none; border: 0; }
 
-    /* ===== TUBES CANVAS BACKGROUND ===== */
-    #canvas {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 0;
+    .wrap { max-width: calc(var(--grid-max) + var(--margin-page) * 2); margin: 0 auto; padding: 0 var(--margin-page); }
+    .grid12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--grid-gutter); }
+    .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+    /* Type roles */
+    .display-xl { font: 700 var(--text-xl)/0.92 var(--font-display); letter-spacing: -0.04em; }
+    .display-l  { font: 600 var(--text-l)/1.0 var(--font-display); letter-spacing: -0.02em; }
+    .display-m  { font: 600 var(--text-m)/1.1 var(--font-display); letter-spacing: -0.015em; }
+    .title-m    { font: 600 var(--text-title)/1.2 var(--font-display); letter-spacing: -0.01em; }
+    .lead       { font: 400 var(--text-lead)/1.5 var(--font-display); }
+    .label      { font: 500 var(--text-label)/1.2 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--graphite); font-variant-numeric: tabular-nums; }
+    .plate-txt  { font: 500 var(--text-plate)/1.2 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+    .meta       { font: 400 0.8125rem/1.4 var(--font-mono); letter-spacing: 0.02em; color: var(--graphite); font-variant-numeric: tabular-nums; }
+
+    /* =====================================================
+       Panels (bands), grain, grooves, screws
+       ===================================================== */
+    .band { position: relative; padding: var(--panel-pad) 0; }
+    .band--paper { background: var(--paper); }
+    .band--light { background: var(--hw-light); }
+    .band::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: var(--grain); opacity: .035; mix-blend-mode: multiply;
+    }
+    .band > * { position: relative; }
+    .groove { height: 2px; background: linear-gradient(#C9C8C4 0 1px, #FFFFFF 1px 2px); border: 0; }
+
+    .panel-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px; }
+    .panel-head .label { display: block; margin-bottom: 12px; }
+
+    .screw {
+      position: absolute; width: 10px; height: 10px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #F2F2F0 0%, var(--hw-grey) 60%, #85847F 100%);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.9);
+    }
+    .screw::after {
+      content: ""; position: absolute; left: 2px; right: 2px; top: 4.5px; height: 1px;
+      background: rgba(14,14,13,.6); transform: rotate(var(--r, 35deg));
+    }
+    .screw.tl { top: 16px; left: 16px; }
+    .screw.tr { top: 16px; right: 16px; --r: -25deg; }
+    .screw.bl { bottom: 16px; left: 16px; --r: 70deg; }
+    .screw.br { bottom: 16px; right: 16px; --r: 10deg; }
+
+    /* LED */
+    .led {
+      display: inline-block; flex: none; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--hw-mid);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.8);
+      transition: background var(--dur-control) var(--ease-out), box-shadow var(--dur-control) var(--ease-out);
+    }
+    .led.on { background: var(--signal); box-shadow: 0 0 8px var(--signal-glow), inset 0 -1px 1px rgba(0,0,0,.2); }
+
+    /* Engraved plates / chips */
+    .plate {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 8px; border: 1px solid var(--hw-grey); border-radius: 2px;
+      font: 500 var(--text-plate)/1.2 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--graphite); background: transparent; text-decoration: none;
+    }
+    .plate--ink { background: var(--ink); border-color: var(--ink); color: var(--white); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Black LED readout window */
+    .readout {
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
+      min-width: 84px; padding: 8px 12px; border-radius: 4px;
+      background: var(--black); color: var(--white);
+      font: 500 2rem/1 var(--font-mono); letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.8), 0 0 0 3px var(--hw-mid), 0 0 0 4px rgba(0,0,0,.12), 0 1px 0 4px #fff;
       overflow: hidden;
     }
+    .readout::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 3px);
+    }
+    .readout--sm { min-width: 0; padding: 4px 8px; font-size: 0.8125rem; letter-spacing: 0.08em; box-shadow: inset 0 1px 4px rgba(0,0,0,.8), 0 0 0 2px var(--hw-mid), 0 1px 0 2px #fff; }
 
-    /* ===== PORTFOLIO OVERLAY UI ===== */
-    .overlay {
+    /* =====================================================
+       Push buttons (key caps)
+       ===================================================== */
+    .key {
+      --c-hi: #34342F; --c-mid: #1C1C1A; --c-lo: #0E0E0D; --side: #000;
       position: relative;
-      z-index: 10;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 80px 20px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 40px; padding: 0 16px;
+      border-radius: var(--radius-key);
+      font: 500 var(--text-plate)/1 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; white-space: nowrap; cursor: pointer;
+      background: linear-gradient(180deg, var(--c-hi) 0%, var(--c-mid) 55%, var(--c-lo) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22),
+        inset 1px 0 0 rgba(255,255,255,.08),
+        inset 0 -2px 3px rgba(0,0,0,.25),
+        0 0 0 1px var(--black),
+        0 3px 0 0 var(--side),
+        0 3px 0 1px var(--black),
+        4px 8px 12px rgba(0,0,0,.22);
+      transition: transform var(--dur-control) var(--ease-out), box-shadow var(--dur-control) var(--ease-out);
+      -webkit-tap-highlight-color: transparent; user-select: none;
+    }
+    .key::after {
+      content: ""; position: absolute; inset: 2px 3px 4px; border-radius: 3px; pointer-events: none;
+      background: radial-gradient(120% 100% at 30% 0%, rgba(255,255,255,.16), rgba(255,255,255,0) 55%);
+    }
+    .key:hover { --c-hi: #3E3E39; }
+    .key:active, .key.is-pressed {
+      transform: translateY(2px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 2px 4px rgba(0,0,0,.5),
+        0 0 0 1px var(--black),
+        0 1px 0 0 var(--side),
+        0 1px 0 1px var(--black),
+        2px 3px 5px rgba(0,0,0,.18);
+    }
+    .key:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+    .key svg { width: 14px; height: 14px; }
+
+    .key--light { --c-hi: #FFFFFF; --c-mid: #EDEDEA; --c-lo: #D6D5D1; --side: #A3A29D; color: var(--ink); }
+    .key--light { box-shadow: inset 0 1px 0 #fff, inset 0 -2px 3px rgba(0,0,0,.08), 0 0 0 1px rgba(14,14,13,.45), 0 3px 0 0 var(--side), 0 3px 0 1px rgba(14,14,13,.45), 4px 8px 12px rgba(0,0,0,.16); }
+    .key--light:hover { --c-mid: #F7F7F5; }
+    .key--light:active, .key--light.is-pressed { box-shadow: inset 0 2px 4px rgba(0,0,0,.18), 0 0 0 1px rgba(14,14,13,.45), 0 1px 0 0 var(--side), 0 1px 0 1px rgba(14,14,13,.45), 2px 3px 5px rgba(0,0,0,.14); }
+
+    .key--signal { --c-hi: #F37A47; --c-mid: #E8561E; --c-lo: #C94617; --side: #8C2F0E; height: 52px; padding: 0 28px; font-size: 0.875rem; }
+    .key--signal { box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 3px rgba(0,0,0,.18), 0 0 0 1px #5C1E08, 0 4px 0 0 var(--side), 0 4px 0 1px #5C1E08, 4px 10px 14px rgba(0,0,0,.25); }
+    .key--signal:hover { --c-hi: #F68858; }
+    .key--signal:active, .key--signal.is-pressed { transform: translateY(2px); box-shadow: inset 0 2px 5px rgba(0,0,0,.35), 0 0 0 1px #5C1E08, 0 2px 0 0 var(--side), 0 2px 0 1px #5C1E08, 2px 4px 6px rgba(0,0,0,.2); }
+    .key--xl { height: 72px; padding: 0 48px; font-size: 1rem; letter-spacing: 0.2em; border-radius: 6px; }
+
+    .keybed {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 12px 16px 16px;
+      border-radius: 8px;
+      background: var(--hw-mid);
+      box-shadow: var(--shadow-inset), 0 1px 0 #fff;
     }
 
-    .portfolio-card {
-      width: 100%;
-      max-width: 1100px;
-      padding: 60px;
+    /* =====================================================
+       Knob
+       ===================================================== */
+    .knob-unit { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .knob-face { position: relative; display: grid; place-items: center; }
+    .knob-face svg.ticks { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .ticks line { stroke: var(--hw-grey); stroke-width: 1.5; stroke-linecap: round; }
+    .ticks line.major { stroke: var(--graphite); }
+    .ticks text { font: 500 8px var(--font-mono); letter-spacing: .08em; fill: var(--graphite); text-anchor: middle; dominant-baseline: middle; }
+    .knob {
+      --angle: -135deg;
+      width: 88px; aspect-ratio: 1; border-radius: 50%;
+      position: relative; cursor: ns-resize; touch-action: none;
+      background:
+        repeating-conic-gradient(from 0deg, rgba(0,0,0,.035) 0 2deg, rgba(255,255,255,.04) 2deg 4deg),
+        radial-gradient(circle at 35% 30%, #FFFFFF 0%, #E6E6E3 45%, #C9C8C4 100%);
+      box-shadow:
+        inset 0 1px 0 #FFFFFF,
+        inset 0 -2px 4px rgba(0,0,0,.12),
+        0 0 0 1px rgba(0,0,0,.12),
+        0 8px 14px rgba(0,0,0,.16),
+        0 1px 2px rgba(0,0,0,.3);
+      transform: rotate(var(--angle));
+      transition: transform var(--dur-control) var(--ease-out);
+    }
+    .knob::before { /* machined cap face */
+      content: ""; position: absolute; inset: 14%; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, #EDEDEA 55%, #D6D5D1 100%);
+      box-shadow: 0 1px 2px rgba(0,0,0,.18), inset 0 1px 0 #fff;
+    }
+    .knob::after {
+      content: ""; position: absolute; left: 50%; top: 10%;
+      width: 3px; height: 28%; margin-left: -1.5px; border-radius: 2px;
+      background: var(--ink);
+    }
+    .knob[data-active="true"]::after, .knob:focus-visible::after { background: var(--signal); }
+    .knob:focus-visible { outline: 2px solid var(--signal); outline-offset: 6px; }
+    .knob.dragging { transition: none; cursor: grabbing; }
+    .knob--master { width: 120px; }
+    .knob--sm { width: 64px; }
+    .knob-value { display: flex; align-items: center; gap: 8px; }
+
+    /* =====================================================
+       Top rail
+       ===================================================== */
+    .rail {
+      position: sticky; top: 0; z-index: 50; height: 56px;
+      background: var(--brushed);
+      border-bottom: 1px solid var(--hw-mid);
+      box-shadow: 0 1px 0 #fff, 0 6px 12px rgba(0,0,0,.06);
+    }
+    .rail .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .rail-name { font: 600 1rem/1 var(--font-display); text-decoration: none; letter-spacing: -0.01em; }
+    .rail-nav { display: flex; gap: 24px; }
+    .toggle { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .toggle .label { color: var(--ink); }
+    .toggle-track {
+      position: relative; width: 28px; height: 14px; border-radius: 7px;
+      background: var(--hw-mid); box-shadow: var(--shadow-inset), 0 1px 0 #fff;
+      transition: background var(--dur-control) var(--ease-out);
+    }
+    .toggle-thumb {
+      position: absolute; top: 1px; left: 1px; width: 16px; height: 12px; border-radius: 6px;
+      background: linear-gradient(180deg, #fff, #D6D5D1);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.25), 1px 2px 3px rgba(0,0,0,.25);
+      transition: transform var(--dur-control) var(--ease-out);
+    }
+    .toggle[aria-current="true"] .toggle-track { background: var(--ink); }
+    .toggle[aria-current="true"] .toggle-thumb { transform: translateX(10px); }
+    .toggle:hover .toggle-thumb { background: #fff; }
+    .toggle:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; border-radius: 4px; }
+    .rail-status { display: inline-flex; align-items: center; gap: 8px; }
+
+    /* =====================================================
+       Panel 01: hero
+       ===================================================== */
+    .hero-panel {
+      position: relative;
+      background: var(--hw-light);
+      border-radius: var(--radius-tile);
+      padding: 96px 64px 64px;
+      box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,.06), var(--shadow-soft);
+    }
+    .hero-copy { grid-column: 1 / 8; }
+    .hero-copy .display-xl { margin: 24px 0 32px; }
+    .hero-copy .lead { max-width: 34ch; margin-bottom: 32px; }
+    .hero-controls { grid-column: 8 / 13; display: flex; align-items: center; justify-content: flex-end; gap: 48px; }
+    .years { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    /* =====================================================
+       Panel 02: experience
+       ===================================================== */
+    .exp-fader { grid-column: 1 / 4; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .exp-year { display: flex; align-items: center; gap: 12px; }
+    .fader { position: relative; display: grid; grid-template-columns: 56px 44px auto; column-gap: 8px; height: 288px; }
+    .fader-scale { position: relative; }
+    .fader-scale span { position: absolute; right: 0; transform: translateY(-50%); }
+    .fader-slot { position: relative; display: flex; justify-content: center; }
+    .fader-track {
+      width: 8px; height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, #A3A29D, #C9C8C4 50%, #E6E6E3);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.25), 0 1px 0 #FFFFFF;
+    }
+    .fader-ticks {
+      position: relative; width: 12px; height: 100%;
+      background: repeating-linear-gradient(180deg, var(--hw-grey) 0 1px, transparent 1px 12px);
+    }
+    .fader-cap {
+      position: absolute; left: 50%; top: 0;
+      width: 44px; height: 22px; margin: -11px 0 0 -22px; border-radius: 3px;
+      background: linear-gradient(180deg, #FFFFFF, #D6D5D1);
+      box-shadow: 0 4px 8px rgba(0,0,0,.2), inset 0 1px 0 #FFFFFF, inset 0 -1px 0 rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.2);
+      cursor: grab; touch-action: none;
+      transition: top var(--dur-control) var(--ease-out), left var(--dur-control) var(--ease-out);
+    }
+    .fader-cap::after { content: ""; position: absolute; left: 6px; right: 6px; top: 10px; height: 2px; background: var(--ink); border-radius: 1px; }
+    .fader-cap:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+    .fader-cap:focus-visible::after, .fader-cap.dragging::after { background: var(--signal); }
+    .fader-cap.dragging { transition: none; cursor: grabbing; }
+
+    .exp-detail { grid-column: 4 / 13; padding-left: 48px; border-left: 2px solid transparent; border-image: linear-gradient(90deg, #C9C8C4 0 1px, #FFFFFF 1px 2px) 1; min-height: 360px; }
+    .exp-detail .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 16px 0 24px; }
+    .exp-detail ul { margin-bottom: 24px; }
+    .exp-detail li { position: relative; padding-left: 24px; margin-bottom: 8px; max-width: 62ch; }
+    .exp-detail li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 12px; height: 1px; background: var(--hw-grey); }
+    .exp-step { display: flex; gap: 12px; margin-top: 32px; }
+    .edu { margin-top: 64px; padding-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    .exp-list li { padding: 16px 0; border-top: 1px solid var(--hw-mid); }
+    .js .exp-list { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .no-js .exp-control, .no-js .filters, .no-js .filter-status { display: none; }
+
+    /* =====================================================
+       Panel 03: projects
+       ===================================================== */
+    .filters {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 24px; align-items: end;
+      padding: 32px; margin-bottom: 48px; border-radius: var(--radius-tile);
+      background: var(--hw-light);
+      box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,.06);
+    }
+    .filter-status { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gutter); }
+    .tile {
+      position: relative; display: flex; flex-direction: column;
+      background: var(--white); border-radius: var(--radius-tile);
+      padding: 16px 16px 24px;
+      box-shadow: var(--shadow-soft); border: 1px solid rgba(0,0,0,.06);
+      transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+    }
+    .tile:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.1); }
+    .tile[hidden] { display: none; }
+    .thumb {
+      position: relative; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; margin-bottom: 24px;
+      background: linear-gradient(180deg, #EFEFEC, #E2E2DE);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.08);
+    }
+    .thumb svg { width: 100%; height: 100%; }
+    .tile-body { padding: 0 8px; display: flex; flex-direction: column; flex: 1; }
+    .tile-body .label { margin-bottom: 8px; }
+    .tile-body .title-m { margin-bottom: 8px; }
+    .tile-body p { color: var(--graphite); margin-bottom: 24px; }
+    .tile-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .power { display: inline-flex; align-items: center; gap: 12px; }
+    .power:hover .led, .power:focus-within .led { background: var(--signal); box-shadow: 0 0 8px var(--signal-glow); }
+    .tile .screw.tl, .tile .screw.tr { top: 8px; }
+    .tile .screw.tl, .tile .screw.bl { left: 8px; }
+    .tile .screw.tr, .tile .screw.br { right: 8px; }
+    .tile .screw.bl, .tile .screw.br { bottom: 8px; }
+    .empty { display: none; grid-column: 1 / -1; padding: 48px; text-align: center; border: 1px dashed var(--hw-grey); border-radius: var(--radius-tile); }
+    .empty.show { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+    /* =====================================================
+       Panel 04: skills (channel strip)
+       ===================================================== */
+    .strip {
+      display: grid; grid-template-columns: repeat(8, minmax(0, 1fr));
+      border-radius: var(--radius-tile); overflow: hidden;
+      background: var(--paper);
+      box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,.06), var(--shadow-soft);
+    }
+    .channel { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 8px; }
+    .channel + .channel { box-shadow: inset 2px 0 0 -1px #C9C8C4, inset 2px 0 0 0 #fff; }
+    .ch-fader { position: relative; height: 180px; width: 44px; display: flex; justify-content: center; }
+    .ch-fader .fader-track { height: 100%; }
+    .ch-fader::before, .ch-fader::after {
+      content: ""; position: absolute; top: 0; bottom: 0; width: 6px;
+      background: repeating-linear-gradient(180deg, var(--hw-grey) 0 1px, transparent 1px 12px);
+    }
+    .ch-fader::before { left: 0; }
+    .ch-fader::after { right: 0; }
+    .ch-fader .fader-cap { cursor: default; top: calc((1 - var(--v)) * 100%); transition: none; }
+    .channel .label { text-align: center; color: var(--ink); min-height: 2.4em; }
+
+    /* =====================================================
+       Panel 05: contact + footer
+       ===================================================== */
+    .contact-unit { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .contact-unit .display-l { margin: 12px 0 48px; }
+    .connect { display: flex; align-items: center; gap: 24px; }
+    .connect .led { width: 10px; height: 10px; }
+    .plates { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 64px; }
+    .plates .plate { padding: 12px 16px; gap: 12px; transition: background var(--dur-control) var(--ease-out); }
+    .plates .plate:hover { background: var(--white); }
+    .plates .plate:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+    .plates .plate b { font-weight: 500; color: var(--ink); letter-spacing: 0.04em; text-transform: none; }
+
+    .footer { position: relative; padding: 32px 0 48px; }
+    .footer .row { display: flex; justify-content: space-between; gap: 24px; padding-top: 24px; }
+    .footer .screw { top: auto; bottom: 16px; }
+
+    .icon { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0ms !important; }
     }
 
-    section {
-      margin-bottom: 80px;
+    /* =====================================================
+       Tablet
+       ===================================================== */
+    @media (max-width: 1080px) {
+      :root { --margin-page: 24px; }
+      .hero-panel { padding: 80px 48px 48px; }
+      .hero-copy, .hero-controls { grid-column: 1 / -1; }
+      .hero-controls { justify-content: flex-start; margin-top: 48px; }
+      .rail-nav { gap: 16px; }
+      .rail-nav .label { display: none; }
+      .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .channel:nth-child(5) { box-shadow: inset 0 2px 0 -1px #C9C8C4, inset 0 2px 0 0 #fff; }
+      .channel:nth-child(n+6) { box-shadow: inset 2px 0 0 -1px #C9C8C4, inset 2px 0 0 0 #fff, inset 0 2px 0 -1px #C9C8C4, inset 0 2px 0 0 #fff; }
+      .filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .filter-status { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
     }
 
-    h1 {
-      font-size: 3.2rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      text-shadow: none;
-      line-height: normal;
-      user-select: auto;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-      opacity: 0.85;
-      margin-bottom: 16px;
-      text-shadow: none;
-      line-height: normal;
-      user-select: auto;
-    }
-
-    p {
-      opacity: 0.8;
-      line-height: 1.7;
-      font-size: 1.05rem;
-      text-shadow: none;
-      user-select: auto;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-      margin-top: 30px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.03);
-      padding: 24px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      margin: 4px 6px 0 0;
-      font-size: 0.75rem;
-    }
-
-    .cta {
-      margin-top: 30px;
-      display: inline-block;
-      padding: 14px 30px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      transition: all 0.3s ease;
-    }
-
-    .cta:hover {
-      background: white;
-      color: black;
-    }
-
-    a {
-      color: #fff;
-      text-decoration: underline;
-      text-decoration-color: rgba(255,255,255,0.3);
-    }
-
-    a:hover {
-      text-decoration-color: #fff;
-    }
-
-    @media (max-width: 768px) {
-      .portfolio-card {
-        padding: 40px 24px;
-      }
-      h1 {
-        font-size: 2.3rem;
-      }
+    /* =====================================================
+       Mobile (fader goes horizontal, knobs wrap 2×2)
+       ===================================================== */
+    @media (max-width: 767px) {
+      :root { --margin-page: 16px; --grid-gutter: 16px; --panel-pad: 32px; }
+      .display-l { font-size: 2.25rem; }
+      .display-m { font-size: 1.625rem; }
+      .rail-nav { display: none; }
+      .hero-panel { padding: 56px 24px 32px; }
+      .hero-controls { gap: 32px; }
+      .knob--master { width: 96px; }
+      .exp-fader, .exp-detail { grid-column: 1 / -1; }
+      .exp-detail { padding-left: 0; border: 0; margin-top: 32px; min-height: 0; }
+      .exp-fader { width: 100%; }
+      .fader { grid-template-columns: 1fr; grid-template-rows: auto 44px 12px; height: auto; width: 100%; row-gap: 4px; padding: 0 20px; }
+      .fader-scale { height: 16px; order: 0; }
+      .fader-scale span { top: 0 !important; right: auto; transform: translateX(-50%); }
+      .fader-slot { height: 44px; align-items: center; }
+      .fader-slot .fader-track { width: 100%; height: 8px; background: linear-gradient(180deg, #A3A29D, #C9C8C4 50%, #E6E6E3); }
+      .fader-ticks { width: 100%; height: 12px; background: repeating-linear-gradient(90deg, var(--hw-grey) 0 1px, transparent 1px 12px); }
+      .fader-slot .fader-cap { top: 50%; width: 22px; height: 44px; margin: -22px 0 0 -11px; transition: left var(--dur-control) var(--ease-out); }
+      .fader-slot .fader-cap::after { left: 10px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; }
+      .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 24px 16px; }
+      .tiles { grid-template-columns: 1fr; }
+      .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .channel { flex-direction: row; justify-content: space-between; padding: 16px; }
+      .channel, .channel + .channel, .channel:nth-child(n) { box-shadow: inset 0 2px 0 -1px #C9C8C4, inset 0 2px 0 0 #fff; }
+      .ch-fader { height: 96px; }
+      .channel .label { min-height: 0; text-align: left; flex: 1; }
+      .key--xl { height: 64px; padding: 0 32px; }
+      .footer .row { flex-direction: column; }
+      .panel-head { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== TUBES CANVAS BACKGROUND ===== -->
-  <canvas id="canvas"></canvas>
-
-  <!-- ===== PORTFOLIO CONTENT ===== -->
-  <main class="overlay">
-    <div class="portfolio-card">
-
-      <!-- HERO -->
-      <section>
-        <h1>Jonathan Pape</h1>
-        <h2>Marketing · Data · AI · Creative Engineering</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
-          <div>
-            <p>
-              I have worked in digital marketing for over 15 years, specializing in paid media, analytics, and AI tooling.
-            </p>
-            <p style="margin-top: 1rem;">Interests:<br>
-              Digital Marketing &bullet; Web Analytics &bullet; User Experience &amp; Data Visualization &bullet;
-              Paid Media &bullet; Generative visuals, data-driven storytelling &bullet; Full-stack applications, and experiments.
-            </p>
-            <p style="margin-top: 1rem;">
-              <a href="https://linkedin.com/in/jonpape" target="_blank">LinkedIn</a> |
-              <a href="https://github.com/jonpape" target="_blank">GitHub</a> |
-              <a href="mailto:jon@jonpape.com" target="_blank">Contact</a>
-            </p>
-          </div>
-        </div>
-        <a class="cta" href="mailto:jon@jonpape.com">Contact Me</a>
-      </section>
-
-      <!-- WORK -->
-      <section>
-        <h2>Selected Work</h2>
-        <div class="grid">
-          <div class="card">
-            <h3><a href="https://urlforge.app" target="_blank">URLForge.app</a></h3>
-            <p>URL parameter builder for marketing teams with AI-powered campaign assistance and template management.</p>
-            <span class="tag">Django</span>
-            <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Deepseek AI</span>
-          </div>
-
-          <div class="card">
-            <h3><a href="https://planningplus.app" target="_blank">PlanningPlus.app</a></h3>
-            <p>Debt payoff calculator and amortization visualization platform.</p>
-            <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Firebase</span>
-          </div>
-
-          <div class="card">
-            <h3><a href="https://lookerstudio.google.com/s/kBLrDBAzbU0" target="_blank">ChatRank</a></h3>
-            <p><a href="https://github.com/jonpape/chatrank" target="_blank">ChatRank github</a></p>
-            <p>AI-powered brand and competitor visibility measurement system for search intelligence.</p>
-            <span class="tag">Python</span>
-            <span class="tag">OpenAI</span>
-          </div>
-
-          <div class="card">
-            <h3><a href="/chatbot_results/report.html" target="_blank">Chatbot tester</a></h3>
-            <p>Python Playwright powered AI chatbot tester with DeepSeek agent verification and analytics.</p>
-            <span class="tag">Python</span>
-            <span class="tag">Playwright</span>
-            <span class="tag">DeepSeek</span>
-          </div>
-
-          <div class="card">
-            <h3><a href="https://peoplefrom.space" target="_blank">PeopleFrom.Space</a></h3>
-            <p>Futuristic creative agency brand &amp; generative visuals (in Development).</p>
-            <span class="tag">Branding</span>
-            <span class="tag">WebGL</span>
-            <span class="tag">Motion</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section>
-        <h2>Skills</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>Languages</h3>
-            <p>Python · JavaScript · TypeScript · SQL</p>
-          </div>
-          <div class="card">
-            <h3>Frameworks</h3>
-            <p>React · Django · Tailwind · Bootstrap</p>
-          </div>
-          <div class="card">
-            <h3>Data Visualization</h3>
-            <p>GA4 · GTM · Looker · Tableau</p>
-          </div>
-          <div class="card">
-            <h3>Advertising</h3>
-            <p>Google · Microsoft · Meta · LinkedIn</p>
-          </div>
-          <div class="card">
-            <h3>AWS</h3>
-            <p>Amplify · EC2 · RDS · Route53</p>
-          </div>
-          <div class="card">
-            <h3>AI</h3>
-            <p>DeepSeek · OpenAI · Gemini SDK</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:jon@jonpape.com">jon@jonpape.com</a></p>
-        <p><a href="https://linkedin.com/in/jonpape" target="_blank">LinkedIn</a> · <a href="https://github.com/jonpape" target="_blank">GitHub</a></p>
-        <a class="cta" href="mailto:jon@jonpape.com">Let's Build</a>
-      </section>
-
+  <!-- ================= Top rail ================= -->
+  <header class="rail">
+    <div class="wrap">
+      <a class="rail-name" href="#about">Jonathan Pape</a>
+      <nav class="rail-nav" aria-label="Primary">
+        <a class="toggle" href="#about"><span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span><span class="label">About</span></a>
+        <a class="toggle" href="#experience"><span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span><span class="label">Experience</span></a>
+        <a class="toggle" href="#projects"><span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span><span class="label">Projects</span></a>
+        <a class="toggle" href="#contact"><span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span><span class="label">Contact</span></a>
+      </nav>
+      <span class="rail-status"><span class="led on" aria-hidden="true"></span><span class="label">Online</span></span>
     </div>
+  </header>
+
+  <main>
+
+    <!-- ================= Panel 01: hero ================= -->
+    <section class="band band--paper" id="about" aria-labelledby="hero-name">
+      <div class="wrap">
+        <div class="hero-panel">
+          <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span>
+          <span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+          <div class="grid12">
+            <div class="hero-copy">
+              <span class="label">Panel 01 / About</span>
+              <h1 id="hero-name" class="display-xl">Jonathan<br>Pape</h1>
+              <p class="lead">Digital marketing director and creative technologist. I lead digital growth at a credit union and build web apps that make marketing and data work easier.</p>
+              <span class="plate">Director of Digital Marketing · Kitsap Credit Union · Since 2024</span>
+            </div>
+            <div class="hero-controls">
+              <div class="knob-unit">
+                <div class="knob-face" style="width:180px;height:180px">
+                  <svg class="ticks" id="vol-ticks" viewBox="0 0 180 180" aria-hidden="true"></svg>
+                  <div class="knob knob--master" id="vol" role="slider" tabindex="0" aria-label="Master volume for key click sounds" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0, muted"></div>
+                </div>
+                <span class="knob-value"><span class="plate-txt">Vol</span><span class="readout readout--sm" id="vol-out">000</span></span>
+              </div>
+              <div class="years">
+                <span class="readout" id="years" aria-describedby="years-label">014</span>
+                <span class="label" id="years-label">Yrs experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="groove">
+
+    <!-- ================= Panel 02: experience ================= -->
+    <section class="band band--light" id="experience" aria-labelledby="exp-title">
+      <div class="wrap">
+        <div class="panel-head">
+          <div>
+            <span class="label">Panel 02 / Experience</span>
+            <h2 id="exp-title" class="display-l">Experience</h2>
+          </div>
+          <span class="label exp-control">Drag the fader or use arrow keys</span>
+        </div>
+
+        <div class="grid12 exp-control">
+          <div class="exp-fader">
+            <div class="exp-year"><span class="plate-txt">Year</span><span class="readout" id="exp-year">2024</span></div>
+            <div class="fader" id="fader">
+              <div class="fader-scale" id="fader-scale" aria-hidden="true"></div>
+              <div class="fader-slot">
+                <div class="fader-track"></div>
+                <div class="fader-cap" id="fader-cap" role="slider" tabindex="0" aria-label="Career timeline" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"></div>
+              </div>
+              <div class="fader-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="exp-detail" id="exp-detail" aria-live="polite">
+            <span class="label" id="d-index">Role 01 / 08</span>
+            <h3 class="display-m" id="d-title" style="margin-top:12px">Director of Digital Marketing</h3>
+            <div class="meta-row"><span class="plate plate--ink" id="d-company">Kitsap Credit Union</span><span class="meta" id="d-dates">Dec 2024 – Present</span></div>
+            <ul id="d-points"></ul>
+            <div class="chips" id="d-tags"></div>
+            <div class="exp-step">
+              <button class="key key--light" type="button" id="exp-prev" aria-label="Newer role">▲ Newer</button>
+              <button class="key key--light" type="button" id="exp-next" aria-label="Older role">▼ Older</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plain list for screen readers and no-JS -->
+        <ol class="exp-list" id="exp-list" aria-label="Full work history"></ol>
+
+        <div class="edu">
+          <span class="label">Education</span>
+          <span class="plate">MCIT · University of Pennsylvania · 2024</span>
+          <span class="plate">MBA · Western Michigan University · 2008</span>
+          <span class="plate">BAS · Davenport University · 2004</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="groove">
+
+    <!-- ================= Panel 03: projects ================= -->
+    <section class="band band--paper" id="projects" aria-labelledby="proj-title">
+      <div class="wrap">
+        <div class="panel-head">
+          <div>
+            <span class="label">Panel 03 / Projects</span>
+            <h2 id="proj-title" class="display-l">Selected work</h2>
+          </div>
+        </div>
+
+        <div class="filters" role="group" aria-label="Project filters">
+          <div class="knob-unit" data-filter="category">
+            <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Category filter"></div></div>
+            <span class="knob-value"><span class="plate-txt">Category</span><span class="readout readout--sm" data-out>All</span></span>
+          </div>
+          <div class="knob-unit" data-filter="stack">
+            <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Stack filter"></div></div>
+            <span class="knob-value"><span class="plate-txt">Stack</span><span class="readout readout--sm" data-out>All</span></span>
+          </div>
+          <div class="knob-unit" data-filter="status">
+            <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Status filter"></div></div>
+            <span class="knob-value"><span class="plate-txt">Status</span><span class="readout readout--sm" data-out>All</span></span>
+          </div>
+          <div class="filter-status">
+            <span class="knob-value"><span class="plate-txt">Showing</span><span class="readout readout--sm" id="count" aria-live="polite">05/05</span></span>
+            <button class="key key--light" type="button" id="reset">■ Reset</button>
+          </div>
+        </div>
+
+        <div class="tiles" id="tiles">
+
+          <article class="tile" data-category="Marketing" data-stack="Django React" data-status="Live">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 400 300">
+                <defs><radialGradient id="g1" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#D6D5D1"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
+                <ellipse cx="200" cy="250" rx="150" ry="14" fill="rgba(0,0,0,.08)"/>
+                <circle cx="160" cy="150" r="72" fill="none" stroke="url(#g1)" stroke-width="22"/>
+                <circle cx="240" cy="150" r="72" fill="none" stroke="#5C5B55" stroke-width="22"/>
+              </svg>
+            </div>
+            <div class="tile-body">
+              <span class="label">Marketing · Django / React</span>
+              <h3 class="title-m">URLForge.app</h3>
+              <p>URL parameter builder for marketing teams, with AI-assisted campaign naming.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://urlforge.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on URLForge (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile" data-category="Finance" data-stack="React" data-status="Live">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 400 300">
+                <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#C9C8C4"/></linearGradient></defs>
+                <ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/>
+                <rect x="96" y="80" width="56" height="170" rx="4" fill="url(#g2)" stroke="#A3A29D"/>
+                <rect x="172" y="130" width="56" height="120" rx="4" fill="url(#g2)" stroke="#A3A29D"/>
+                <rect x="248" y="184" width="56" height="66" rx="4" fill="#5C5B55"/>
+              </svg>
+            </div>
+            <div class="tile-body">
+              <span class="label">Finance · React</span>
+              <h3 class="title-m">PlanningPlus.app</h3>
+              <p>Debt payoff calculator with amortization charts.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://planningplus.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PlanningPlus (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile" data-category="AI" data-stack="Python" data-status="Open source">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 400 300">
+                <defs><radialGradient id="g3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
+                <ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/>
+                <path d="M90 246 A110 110 0 0 1 310 246 Z" fill="url(#g3)" stroke="#A3A29D"/>
+                <circle cx="200" cy="96" r="40" fill="#5C5B55"/>
+              </svg>
+            </div>
+            <div class="tile-body">
+              <span class="label">AI · Python</span>
+              <h3 class="title-m">ChatRank</h3>
+              <p>Measures how visible brands and competitors are in AI search answers.</p>
+              <div class="tile-foot">
+                <span class="plate">Open source</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://github.com/jonpape/chatrank" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on ChatRank (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile" data-category="AI" data-stack="Python" data-status="Demo">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 400 300">
+                <defs><radialGradient id="g4" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
+                <ellipse cx="200" cy="254" rx="120" ry="12" fill="rgba(0,0,0,.08)"/>
+                <circle cx="200" cy="146" r="96" fill="url(#g4)" stroke="#A3A29D"/>
+                <circle cx="200" cy="146" r="34" fill="#1C1C1A"/>
+              </svg>
+            </div>
+            <div class="tile-body">
+              <span class="label">AI · Python / Playwright</span>
+              <h3 class="title-m">Chatbot tester</h3>
+              <p>Playwright-driven AI chatbot tester with agent verification and a results report.</p>
+              <div class="tile-foot">
+                <span class="plate">Demo</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="/chatbot_results/report.html" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on chatbot tester report (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tile" data-category="Creative" data-stack="WebGL" data-status="In dev">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 400 300">
+                <defs><radialGradient id="g5" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#8a8984"/><stop offset=".6" stop-color="#3a3a36"/><stop offset="1" stop-color="#0E0E0D"/></radialGradient></defs>
+                <ellipse cx="200" cy="254" rx="120" ry="12" fill="rgba(0,0,0,.1)"/>
+                <circle cx="200" cy="146" r="96" fill="url(#g5)"/>
+                <circle cx="292" cy="70" r="20" fill="#fff" stroke="#A3A29D"/>
+              </svg>
+            </div>
+            <div class="tile-body">
+              <span class="label">Creative · WebGL</span>
+              <h3 class="title-m">PeopleFrom.Space</h3>
+              <p>Brand and generative visuals for a future-facing creative studio.</p>
+              <div class="tile-foot">
+                <span class="plate">In dev</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://peoplefrom.space" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PeopleFrom.Space (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+
+          <div class="empty" id="empty">
+            <span class="plate-txt">No modules match these settings</span>
+            <button class="key key--light" type="button" id="reset2">■ Reset filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="groove">
+
+    <!-- ================= Panel 04: skills ================= -->
+    <section class="band band--light" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="panel-head">
+          <div>
+            <span class="label">Panel 04 / Skills</span>
+            <h2 id="skills-title" class="display-l">Channel strip</h2>
+          </div>
+          <span class="label">Level 00–10</span>
+        </div>
+        <div class="strip" id="strip">
+          <!-- data-v: proficiency 0–10 -->
+          <div class="channel" data-name="Paid media" data-v="10"></div>
+          <div class="channel" data-name="Web analytics" data-v="10"></div>
+          <div class="channel" data-name="SEO / AEO" data-v="9"></div>
+          <div class="channel" data-name="Data viz" data-v="9"></div>
+          <div class="channel" data-name="SQL" data-v="8"></div>
+          <div class="channel" data-name="Python" data-v="8"></div>
+          <div class="channel" data-name="React / TS" data-v="7"></div>
+          <div class="channel" data-name="AI agents" data-v="7"></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="groove">
+
+    <!-- ================= Panel 05: contact ================= -->
+    <section class="band band--paper" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-unit">
+        <span class="label">Panel 05 / Contact</span>
+        <h2 id="contact-title" class="display-l">Let's make something.</h2>
+        <div class="keybed connect">
+          <span class="led" id="connect-led" aria-hidden="true"></span>
+          <a class="key key--signal key--xl" id="connect" href="mailto:jon@jonpape.com">● Connect</a>
+        </div>
+        <div class="plates">
+          <a class="plate" href="mailto:jon@jonpape.com">Email <b>jon@jonpape.com</b></a>
+          <a class="plate" href="https://www.linkedin.com/in/jonpape/" target="_blank" rel="noopener">LinkedIn <b>in/jonpape</b></a>
+          <a class="plate" href="https://github.com/jonpape" target="_blank" rel="noopener">GitHub <b>jonpape</b></a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ===== TUBES CURSOR BACKGROUND SCRIPT ===== -->
-  <script type="module">
-    // Licence CC BY-NC-SA 4.0
-    // Attribution — You must give appropriate credit.
-    // Non Commercial — You may not use the material for commercial purposes.
+  <footer class="footer">
+    <div class="wrap">
+      <hr class="groove">
+      <div class="row">
+        <span class="label">© <span id="year">2026</span> Jonathan Pape · Build JP-26.11</span>
+        <a class="label" href="/archive/2026/">Previous site: 2026 archive</a>
+      </div>
+    </div>
+    <span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+  </footer>
 
-    import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
+  <script>
+  (function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+    var NS = 'http://www.w3.org/2000/svg';
+    var pad = function (n, w) { return String(n).padStart(w || 2, '0'); };
+    $('#year').textContent = new Date().getFullYear();
 
-    const app = TubesCursor(document.getElementById('canvas'), {
-      tubes: {
-        colors: ["#f967fb", "#53bc28", "#6958d5"],
-        lights: {
-          intensity: 200,
-          colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
-        }
-      }
-    })
+    /* ---------- Years of experience (since Nov 2012) ---------- */
+    var start = new Date(2012, 10, 1), now = new Date();
+    var yrs = now.getFullYear() - start.getFullYear() - (now < new Date(now.getFullYear(), 10, 1) ? 1 : 0);
+    $('#years').textContent = pad(yrs, 3);
+    $('#years').setAttribute('aria-label', yrs + ' years');
 
-    document.body.addEventListener('click', (e) => {
-      // Only randomize colors if the click isn't on a link or interactive element
-      if (e.target.tagName === 'A' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return
-
-      const colors = randomColors(3)
-      const lightsColors = randomColors(4)
-      app.tubes.setColors(colors)
-      app.tubes.setLightsColors(lightsColors)
-    })
-
-    function randomColors(count) {
-      return new Array(count)
-        .fill(0)
-        .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
+    /* ---------- Sound ---------- */
+    var vol = 0, ctx = null;
+    try { vol = Math.max(0, Math.min(100, parseInt(localStorage.getItem('jp-vol') || '0', 10) || 0)); } catch (e) {}
+    function click(level) {
+      if (navigator.vibrate) { try { navigator.vibrate(5); } catch (e) {} }
+      if (!vol) return;
+      try {
+        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+        var t = ctx.currentTime, amp = (vol / 100) * (level || 1);
+        var len = Math.floor(ctx.sampleRate * 0.03), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+        for (var k = 0; k < len; k++) d[k] = (Math.random() * 2 - 1) * Math.pow(1 - k / len, 6);
+        var src = ctx.createBufferSource(); src.buffer = buf;
+        var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 2800; bp.Q.value = 1.2;
+        var g = ctx.createGain(); g.gain.value = 0.5 * amp;
+        src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(t);
+        var o = ctx.createOscillator(), og = ctx.createGain();
+        o.frequency.setValueAtTime(180, t); o.frequency.exponentialRampToValueAtTime(60, t + 0.05);
+        og.gain.setValueAtTime(0.25 * amp, t); og.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+        o.connect(og); og.connect(ctx.destination); o.start(t); o.stop(t + 0.07);
+      } catch (e) {}
     }
-  </script>
 
+    /* ---------- Generic knob ---------- */
+    function drawTicks(svg, size, knobSize, marks) {
+      var c = size / 2, rIn = knobSize / 2 + 8, rOut = knobSize / 2 + 14, rTxt = knobSize / 2 + 24;
+      marks.forEach(function (m) {
+        var a = (-135 + m.t * 270) * Math.PI / 180;
+        var l = document.createElementNS(NS, 'line');
+        var ri = m.major ? rIn - 2 : rIn;
+        l.setAttribute('x1', c + ri * Math.sin(a)); l.setAttribute('y1', c - ri * Math.cos(a));
+        l.setAttribute('x2', c + rOut * Math.sin(a)); l.setAttribute('y2', c - rOut * Math.cos(a));
+        if (m.major) l.setAttribute('class', 'major');
+        svg.appendChild(l);
+        if (m.text) {
+          var tx = document.createElementNS(NS, 'text');
+          tx.setAttribute('x', c + rTxt * Math.sin(a)); tx.setAttribute('y', c - rTxt * Math.cos(a));
+          tx.textContent = m.text; svg.appendChild(tx);
+        }
+      });
+    }
+
+    function Knob(el, opts) {
+      // opts: { steps: n (number of positions), value, pxPerStep, wheelStep, keyStep, format(v), onChange(v) }
+      var self = this, max = opts.steps - 1, value = opts.value || 0;
+      function apply(v, silent) {
+        v = Math.max(0, Math.min(max, Math.round(v)));
+        var changed = v !== value; value = v;
+        el.style.setProperty('--angle', (-135 + (max ? v / max : 0) * 270) + 'deg');
+        el.setAttribute('aria-valuemin', 0); el.setAttribute('aria-valuemax', max);
+        el.setAttribute('aria-valuenow', v); el.setAttribute('aria-valuetext', opts.format(v));
+        el.setAttribute('data-active', v > 0 ? 'true' : 'false');
+        if (changed && !silent) { opts.onChange(v); click(0.6); }
+      }
+      self.set = function (v) { apply(v); };
+      self.get = function () { return value; };
+      var startY = 0, startV = 0, dragging = false;
+      el.addEventListener('pointerdown', function (e) {
+        dragging = true; startY = e.clientY; startV = value;
+        el.setPointerCapture(e.pointerId); el.classList.add('dragging'); el.focus({ preventScroll: true });
+      });
+      el.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        apply(startV + (startY - e.clientY) / opts.pxPerStep);
+      });
+      ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (n) {
+        el.addEventListener(n, function () { dragging = false; el.classList.remove('dragging'); });
+      });
+      el.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        apply(value + (e.deltaY < 0 ? 1 : -1) * opts.wheelStep);
+      }, { passive: false });
+      el.addEventListener('keydown', function (e) {
+        var k = e.key, s = opts.keyStep * (e.shiftKey ? 2 : 1);
+        if (k === 'ArrowUp' || k === 'ArrowRight') apply(value + s);
+        else if (k === 'ArrowDown' || k === 'ArrowLeft') apply(value - s);
+        else if (k === 'PageUp') apply(value + s * 2);
+        else if (k === 'PageDown') apply(value - s * 2);
+        else if (k === 'Home') apply(0);
+        else if (k === 'End') apply(max);
+        else return;
+        e.preventDefault();
+      });
+      apply(value, true);
+    }
+
+    /* ---------- Master VOL knob ---------- */
+    var volOut = $('#vol-out');
+    drawTicks($('#vol-ticks'), 180, 120, [0, 25, 50, 75, 100].map(function (v) { return { t: v / 100, major: true, text: String(v) }; })
+      .concat(Array.from({ length: 21 }, function (_, i) { return { t: i / 20 }; })));
+    new Knob($('#vol'), {
+      steps: 101, value: vol, pxPerStep: 1, wheelStep: 5, keyStep: 5,
+      format: function (v) { return v ? String(v) : '0, muted'; },
+      onChange: function (v) { vol = v; volOut.textContent = pad(v, 3); try { localStorage.setItem('jp-vol', v); } catch (e) {} }
+    });
+    volOut.textContent = pad(vol, 3);
+
+    /* ---------- Experience fader ---------- */
+    var roles = [
+      { y: 2024, t: 'Director of Digital Marketing', c: 'Kitsap Credit Union', d: 'Dec 2024 – Present',
+        p: ['Leads content strategy and the redesign roadmap for kitsapcu.org, plus site security, cookie consent and privacy compliance.',
+            'Built a CRO program with backend conversion tracking, A/B and multivariate tests, and a documented test log.',
+            'Built a multi-agent AI system that reviews chatbot conversations against site content and recommends fixes.'],
+        tags: ['SEO / AEO / GEO', 'CRO', 'GA4', 'Multi-agent AI'] },
+      { y: 2024, t: 'Sr. Digital Experience Manager', c: 'Genentech · Contract', d: 'Sep 2024 – Dec 2024',
+        p: ['Owned paid search and organic social strategy, projections and recommendations.',
+            'Turned brand messaging into integrated, omnichannel media plans.',
+            'Managed agency partners across a large, global, matrixed organization.'],
+        tags: ['SEM', 'Organic social', 'Agencies'] },
+      { y: 2023, t: 'Digital Marketing Manager', c: 'Kmotion Design', d: 'May 2023 – Sep 2024',
+        p: ['Ran search and paid social for every agency client, plus LinkedIn, TikTok, Amazon, Spotify and more.',
+            'Moved all clients from Universal Analytics to GA4, with new GTM setups and Looker Studio reporting.',
+            'Directed SEO and UX/UI redesign recommendations, and mentored junior staff.'],
+        tags: ['SEM', 'Paid social', 'GA4', 'Looker Studio'] },
+      { y: 2023, t: 'Director of Digital Marketing', c: 'Sandia Laboratory FCU', d: 'May 2023 – Dec 2023',
+        p: ['Rebuilt paid search campaign structure for a 300% increase in conversions.',
+            'Moved analytics to GA4 and added predictive modeling on member data in SQL Server.',
+            'Launched a Claritas program based on member data analysis.'],
+        tags: ['Paid search', 'GA4', 'SQL Server', 'Claritas'] },
+      { y: 2022, t: 'Global Digital Paid Media Manager', c: 'Mandiant · Google Cloud', d: 'Apr 2022 – Jan 2023',
+        p: ['Owned paid search, social, display and video in 40+ countries, about $2M a quarter.',
+            'Grew LinkedIn leads nearly 500% on a comparable budget.',
+            'Built a lead pipeline audit across Salesforce, HubSpot, Marketo and LinkedIn.'],
+        tags: ['B2B SaaS', 'LinkedIn Ads', 'Salesforce', 'Forecasting'] },
+      { y: 2015, t: 'Senior Marketing Strategist', c: 'First Tech Federal Credit Union', d: 'Dec 2015 – Apr 2022',
+        p: ['Ran 60+ paid search and display campaigns at over $300K a month, plus all SEO.',
+            'Built a member and channel reporting pipeline with Snowflake, Alteryx and Tableau.',
+            'Created board and C-suite dashboards, and tested audience segments in Snowflake SQL.'],
+        tags: ['Paid search', 'SEO', 'Snowflake', 'Tableau'] },
+      { y: 2013, t: 'Senior Creative Strategist', c: 'Yahoo', d: 'Sep 2013 – Dec 2015',
+        p: ['Trained account managers on new ad platform features.',
+            'Built example campaigns for advertiser pitch meetings.',
+            'Created a seasonality planning tool for retail advertisers.'],
+        tags: ['Ad platforms', 'Training', 'Retail'] },
+      { y: 2012, t: 'Digital Paid Media Specialist', c: 'Ethology', d: 'Nov 2012 – Sep 2013',
+        p: ['Managed 20+ clients with over $1.3M a month in PPC spend.',
+            'Launched AdWords, Bing, Facebook and call-tracking programs.',
+            'Designed a bid management strategy that ran accurately for two years.'],
+        tags: ['PPC', 'Attribution', 'Bid management'] }
+    ];
+    var N = roles.length;
+
+    // Plain list fallback
+    $('#exp-list').innerHTML = roles.map(function (r) {
+      return '<li><h3 class="title-m">' + r.t + '</h3><p class="meta">' + r.c + ' · ' + r.d + '</p><ul>' +
+        r.p.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></li>';
+    }).join('');
+
+    var cap = $('#fader-cap'), slot = $('.fader-slot'), scale = $('#fader-scale'), cur = 0;
+    var labels = roles.map(function (r, i) {
+      var s = document.createElement('span'); s.className = 'meta'; s.textContent = r.y;
+      if (i > 0 && roles[i - 1].y === r.y) s.style.visibility = 'hidden';
+      scale.appendChild(s); return s;
+    });
+    function vertical() { return slot.offsetHeight > slot.offsetWidth; }
+    function layout() {
+      var v = vertical();
+      cap.setAttribute('aria-orientation', v ? 'vertical' : 'horizontal');
+      labels.forEach(function (s, i) {
+        var f = (i / (N - 1) * 100) + '%';
+        if (v) { s.style.top = f; s.style.left = ''; } else { s.style.left = f; s.style.top = ''; }
+      });
+      placeCap();
+    }
+    function placeCap() {
+      var f = (cur / (N - 1) * 100) + '%';
+      if (vertical()) { cap.style.top = f; cap.style.left = ''; } else { cap.style.left = f; cap.style.top = ''; }
+    }
+    function showRole(i, silent) {
+      i = Math.max(0, Math.min(N - 1, i));
+      if (i === cur && !silent && cap.getAttribute('aria-valuenow') == i) return;
+      var changed = i !== cur; cur = i;
+      var r = roles[i];
+      placeCap();
+      $('#exp-year').textContent = r.y;
+      $('#d-index').textContent = 'Role ' + pad(i + 1) + ' / ' + pad(N);
+      $('#d-title').textContent = r.t;
+      $('#d-company').textContent = r.c;
+      $('#d-dates').textContent = r.d;
+      $('#d-points').innerHTML = r.p.map(function (x) { return '<li>' + x + '</li>'; }).join('');
+      $('#d-tags').innerHTML = r.tags.slice(0, 4).map(function (x) { return '<span class="plate">' + x + '</span>'; }).join('');
+      labels.forEach(function (s, k) { s.style.color = k === i ? 'var(--ink)' : ''; });
+      cap.setAttribute('aria-valuenow', i);
+      cap.setAttribute('aria-valuetext', r.t + ', ' + r.c + ', ' + r.d);
+      $('#exp-prev').disabled = i === 0; $('#exp-next').disabled = i === N - 1;
+      if (changed && !silent) click(0.5);
+    }
+    var fDrag = false;
+    function fromPointer(e) {
+      var rect = slot.getBoundingClientRect();
+      var f = vertical() ? (e.clientY - rect.top) / rect.height : (e.clientX - rect.left) / rect.width;
+      showRole(Math.round(Math.max(0, Math.min(1, f)) * (N - 1)));
+    }
+    cap.addEventListener('pointerdown', function (e) { fDrag = true; cap.setPointerCapture(e.pointerId); cap.classList.add('dragging'); e.preventDefault(); });
+    cap.addEventListener('pointermove', function (e) { if (fDrag) fromPointer(e); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (n) { cap.addEventListener(n, function () { fDrag = false; cap.classList.remove('dragging'); }); });
+    slot.addEventListener('pointerdown', function (e) { if (e.target !== cap) fromPointer(e); });
+    cap.addEventListener('keydown', function (e) {
+      var k = e.key;
+      if (k === 'ArrowDown' || k === 'ArrowRight') showRole(cur + 1);
+      else if (k === 'ArrowUp' || k === 'ArrowLeft') showRole(cur - 1);
+      else if (k === 'Home') showRole(0);
+      else if (k === 'End') showRole(N - 1);
+      else return;
+      e.preventDefault();
+    });
+    $('#exp-prev').addEventListener('click', function () { showRole(cur - 1); });
+    $('#exp-next').addEventListener('click', function () { showRole(cur + 1); });
+    window.addEventListener('resize', layout);
+    layout(); showRole(0, true);
+
+    /* ---------- Project filter knobs ---------- */
+    var tiles = $$('#tiles .tile');
+    var filterState = {};
+    var knobs = [];
+    $$('.filters [data-filter]').forEach(function (unit) {
+      var key = unit.getAttribute('data-filter');
+      var opts = ['All'];
+      tiles.forEach(function (t) {
+        var vals = key === 'stack' ? t.dataset[key].split(' ') : [t.dataset[key]];
+        vals.forEach(function (v) { if (opts.indexOf(v) < 0) opts.push(v); });
+      });
+      var out = $('[data-out]', unit), el = $('.knob', unit), svg = $('svg.ticks', unit);
+      drawTicks(svg, 132, 88, opts.map(function (o, i) { return { t: i / (opts.length - 1), major: true }; }));
+      filterState[key] = 'All';
+      knobs.push(new Knob(el, {
+        steps: opts.length, value: 0, pxPerStep: 18, wheelStep: 1, keyStep: 1,
+        format: function (v) { return opts[v]; },
+        onChange: function (v) { filterState[key] = opts[v]; out.textContent = opts[v]; applyFilters(); }
+      }));
+    });
+    function applyFilters() {
+      var shown = 0;
+      tiles.forEach(function (t) {
+        var ok = Object.keys(filterState).every(function (k) {
+          var want = filterState[k]; if (want === 'All') return true;
+          return (k === 'stack' ? t.dataset[k].split(' ') : [t.dataset[k]]).indexOf(want) >= 0;
+        });
+        t.hidden = !ok; if (ok) shown++;
+      });
+      $('#count').textContent = pad(shown) + '/' + pad(tiles.length);
+      $('#empty').classList.toggle('show', shown === 0);
+    }
+    function resetFilters() { knobs.forEach(function (k) { k.set(0); }); }
+    $('#reset').addEventListener('click', resetFilters);
+    $('#reset2').addEventListener('click', resetFilters);
+
+    /* ---------- Skills channel strip ---------- */
+    $$('#strip .channel').forEach(function (ch) {
+      var v = parseInt(ch.dataset.v, 10), name = ch.dataset.name;
+      ch.setAttribute('role', 'img');
+      ch.setAttribute('aria-label', name + ': level ' + v + ' of 10');
+      ch.innerHTML =
+        '<span class="readout readout--sm" aria-hidden="true">' + pad(v) + '</span>' +
+        '<div class="ch-fader" aria-hidden="true" style="--v:' + (v / 10) + '"><div class="fader-track"></div><div class="fader-cap"></div></div>' +
+        '<span class="label" aria-hidden="true">' + name + '</span>';
+    });
+
+    /* ---------- Rail toggles follow the visible panel ---------- */
+    var toggles = $$('.rail-nav .toggle'), map = {};
+    toggles.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var id = e.target.id === 'skills' ? 'projects' : e.target.id;
+          toggles.forEach(function (a) { a.removeAttribute('aria-current'); });
+          if (map[id]) map[id].setAttribute('aria-current', 'true');
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      ['about', 'experience', 'projects', 'skills', 'contact'].forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+    }
+
+    /* ---------- Key press feedback ---------- */
+    $$('.key, .toggle, .plate[href]').forEach(function (el) {
+      el.addEventListener('pointerdown', function () { click(el.classList.contains('key--signal') ? 1 : 0.7); });
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { el.classList.add('is-pressed'); click(0.8); } });
+      el.addEventListener('keyup', function () { el.classList.remove('is-pressed'); });
+      el.addEventListener('blur', function () { el.classList.remove('is-pressed'); });
+    });
+    var connect = $('#connect'), cled = $('#connect-led');
+    connect.addEventListener('pointerdown', function () { cled.classList.add('on'); });
+    connect.addEventListener('keydown', function (e) { if (e.key === 'Enter') cled.classList.add('on'); });
+  })();
+  </script>
 </body>
 </html>

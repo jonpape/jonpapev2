@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jonathan Pape — Web Design, Development, and Marketing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Jonathan Pape is a creative technologist based near Seattle, WA with expertise in paid media, data engineering, and generative art.">
+  <meta name="keywords" content="Jonathan Pape, creative technologist, paid media, data engineering, generative art">
+  <meta name="author" content="Jonathan Pape">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow-x: hidden;
+      touch-action: none;
+    }
+
+    /* ===== TUBES CANVAS BACKGROUND ===== */
+    #canvas {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* ===== PORTFOLIO OVERLAY UI ===== */
+    .overlay {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 80px 20px;
+    }
+
+    .portfolio-card {
+      width: 100%;
+      max-width: 1100px;
+      padding: 60px;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: none;
+      line-height: normal;
+      user-select: auto;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      opacity: 0.85;
+      margin-bottom: 16px;
+      text-shadow: none;
+      line-height: normal;
+      user-select: auto;
+    }
+
+    p {
+      opacity: 0.8;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      text-shadow: none;
+      user-select: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      margin: 4px 6px 0 0;
+      font-size: 0.75rem;
+    }
+
+    .cta {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      transition: all 0.3s ease;
+    }
+
+    .cta:hover {
+      background: white;
+      color: black;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.3);
+    }
+
+    a:hover {
+      text-decoration-color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-card {
+        padding: 40px 24px;
+      }
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TUBES CANVAS BACKGROUND ===== -->
+  <canvas id="canvas"></canvas>
+
+  <!-- ===== PORTFOLIO CONTENT ===== -->
+  <main class="overlay">
+    <div class="portfolio-card">
+
+      <!-- HERO -->
+      <section>
+        <h1>Jonathan Pape</h1>
+        <h2>Marketing · Data · AI · Creative Engineering</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+          <div>
+            <p>
+              I have worked in digital marketing for over 15 years, specializing in paid media, analytics, and AI tooling.
+            </p>
+            <p style="margin-top: 1rem;">Interests:<br>
+              Digital Marketing &bullet; Web Analytics &bullet; User Experience &amp; Data Visualization &bullet;
+              Paid Media &bullet; Generative visuals, data-driven storytelling &bullet; Full-stack applications, and experiments.
+            </p>
+            <p style="margin-top: 1rem;">
+              <a href="https://linkedin.com/in/jonpape" target="_blank">LinkedIn</a> |
+              <a href="https://github.com/jonpape" target="_blank">GitHub</a> |
+              <a href="mailto:jon@jonpape.com" target="_blank">Contact</a>
+            </p>
+          </div>
+        </div>
+        <a class="cta" href="mailto:jon@jonpape.com">Contact Me</a>
+      </section>
+
+      <!-- WORK -->
+      <section>
+        <h2>Selected Work</h2>
+        <div class="grid">
+          <div class="card">
+            <h3><a href="https://urlforge.app" target="_blank">URLForge.app</a></h3>
+            <p>URL parameter builder for marketing teams with AI-powered campaign assistance and template management.</p>
+            <span class="tag">Django</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Deepseek AI</span>
+          </div>
+
+          <div class="card">
+            <h3><a href="https://planningplus.app" target="_blank">PlanningPlus.app</a></h3>
+            <p>Debt payoff calculator and amortization visualization platform.</p>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Firebase</span>
+          </div>
+
+          <div class="card">
+            <h3><a href="https://lookerstudio.google.com/s/kBLrDBAzbU0" target="_blank">ChatRank</a></h3>
+            <p><a href="https://github.com/jonpape/chatrank" target="_blank">ChatRank github</a></p>
+            <p>AI-powered brand and competitor visibility measurement system for search intelligence.</p>
+            <span class="tag">Python</span>
+            <span class="tag">OpenAI</span>
+          </div>
+
+          <div class="card">
+            <h3><a href="/chatbot_results/report.html" target="_blank">Chatbot tester</a></h3>
+            <p>Python Playwright powered AI chatbot tester with DeepSeek agent verification and analytics.</p>
+            <span class="tag">Python</span>
+            <span class="tag">Playwright</span>
+            <span class="tag">DeepSeek</span>
+          </div>
+
+          <div class="card">
+            <h3><a href="https://peoplefrom.space" target="_blank">PeopleFrom.Space</a></h3>
+            <p>Futuristic creative agency brand &amp; generative visuals (in Development).</p>
+            <span class="tag">Branding</span>
+            <span class="tag">WebGL</span>
+            <span class="tag">Motion</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section>
+        <h2>Skills</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Languages</h3>
+            <p>Python · JavaScript · TypeScript · SQL</p>
+          </div>
+          <div class="card">
+            <h3>Frameworks</h3>
+            <p>React · Django · Tailwind · Bootstrap</p>
+          </div>
+          <div class="card">
+            <h3>Data Visualization</h3>
+            <p>GA4 · GTM · Looker · Tableau</p>
+          </div>
+          <div class="card">
+            <h3>Advertising</h3>
+            <p>Google · Microsoft · Meta · LinkedIn</p>
+          </div>
+          <div class="card">
+            <h3>AWS</h3>
+            <p>Amplify · EC2 · RDS · Route53</p>
+          </div>
+          <div class="card">
+            <h3>AI</h3>
+            <p>DeepSeek · OpenAI · Gemini SDK</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:jon@jonpape.com">jon@jonpape.com</a></p>
+        <p><a href="https://linkedin.com/in/jonpape" target="_blank">LinkedIn</a> · <a href="https://github.com/jonpape" target="_blank">GitHub</a></p>
+        <a class="cta" href="mailto:jon@jonpape.com">Let's Build</a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===== TUBES CURSOR BACKGROUND SCRIPT ===== -->
+  <script type="module">
+    // Licence CC BY-NC-SA 4.0
+    // Attribution — You must give appropriate credit.
+    // Non Commercial — You may not use the material for commercial purposes.
+
+    import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
+
+    const app = TubesCursor(document.getElementById('canvas'), {
+      tubes: {
+        colors: ["#f967fb", "#53bc28", "#6958d5"],
+        lights: {
+          intensity: 200,
+          colors: ["#83f36e", "#fe8a2e", "#ff008a", "#60aed5"]
+        }
+      }
+    })
+
+    document.body.addEventListener('click', (e) => {
+      // Only randomize colors if the click isn't on a link or interactive element
+      if (e.target.tagName === 'A' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return
+
+      const colors = randomColors(3)
+      const lightsColors = randomColors(4)
+      app.tubes.setColors(colors)
+      app.tubes.setLightsColors(lightsColors)
+    })
+
+    function randomColors(count) {
+      return new Array(count)
+        .fill(0)
+        .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
+    }
+  </script>
+
+</body>
+</html>
