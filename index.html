@@ -218,6 +218,8 @@
     .key--signal { box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 3px rgba(0,0,0,.18), 0 0 0 1px #5C1E08, 0 4px 0 0 var(--side), 0 4px 0 1px #5C1E08, 4px 10px 14px rgba(0,0,0,.25); }
     .key--signal:hover { --c-hi: #F68858; }
     .key--signal:active, .key--signal.is-pressed { transform: translateY(2px); box-shadow: inset 0 2px 5px rgba(0,0,0,.35), 0 0 0 1px #5C1E08, 0 2px 0 0 var(--side), 0 2px 0 1px #5C1E08, 2px 4px 6px rgba(0,0,0,.2); }
+    .key--off { cursor: not-allowed; opacity: .55; }
+    .key--off:active { transform: none; }
     .key--xl { height: 72px; padding: 0 48px; font-size: 1rem; letter-spacing: 0.2em; border-radius: 6px; }
 
     .keybed {
@@ -386,6 +388,13 @@
       box-shadow: inset 0 1px 3px rgba(0,0,0,.08);
     }
     .thumb svg { width: 100%; height: 100%; }
+    .thumb--shot { background: var(--hw-light); }
+    .thumb--shot img {
+      display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      filter: grayscale(1) contrast(1.04);
+      transition: filter 200ms var(--ease-out);
+    }
+    .tile:hover .thumb--shot img, .tile:focus-within .thumb--shot img { filter: none; }
     .tile-body { padding: 0 8px; display: flex; flex-direction: column; flex: 1; }
     .tile-body .label { margin-bottom: 8px; }
     .tile-body .title-m { margin-bottom: 8px; }
@@ -493,7 +502,9 @@
       .channel, .channel + .channel, .channel:nth-child(n) { box-shadow: inset 0 2px 0 -1px #C9C8C4, inset 0 2px 0 0 #fff; }
       .ch-fader { height: 96px; }
       .channel .label { min-height: 0; text-align: left; flex: 1; }
-      .key--xl { height: 64px; padding: 0 32px; }
+      .key--off { cursor: not-allowed; opacity: .55; }
+    .key--off:active { transform: none; }
+    .key--xl { height: 64px; padding: 0 32px; }
       .footer .row { flex-direction: column; }
       .panel-head { flex-direction: column; align-items: flex-start; }
     }
@@ -539,7 +550,7 @@
                 <span class="knob-value"><span class="plate-txt">Vol</span><span class="readout readout--sm" id="vol-out">000</span></span>
               </div>
               <div class="years">
-                <span class="readout" id="years" aria-describedby="years-label">014</span>
+                <span class="readout" id="years" aria-describedby="years-label">018</span>
                 <span class="label" id="years-label">Yrs experience</span>
               </div>
             </div>
@@ -568,14 +579,14 @@
               <div class="fader-scale" id="fader-scale" aria-hidden="true"></div>
               <div class="fader-slot">
                 <div class="fader-track"></div>
-                <div class="fader-cap" id="fader-cap" role="slider" tabindex="0" aria-label="Career timeline" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"></div>
+                <div class="fader-cap" id="fader-cap" role="slider" tabindex="0" aria-label="Career timeline" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0"></div>
               </div>
               <div class="fader-ticks" aria-hidden="true"></div>
             </div>
           </div>
 
           <div class="exp-detail" id="exp-detail" aria-live="polite">
-            <span class="label" id="d-index">Role 01 / 08</span>
+            <span class="label" id="d-index">Role 01 / 10</span>
             <h3 class="display-m" id="d-title" style="margin-top:12px">Director of Digital Marketing</h3>
             <div class="meta-row"><span class="plate plate--ink" id="d-company">Kitsap Credit Union</span><span class="meta" id="d-dates">Dec 2024 – Present</span></div>
             <ul id="d-points"></ul>
@@ -616,77 +627,79 @@
             <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Category filter"></div></div>
             <span class="knob-value"><span class="plate-txt">Category</span><span class="readout readout--sm" data-out>All</span></span>
           </div>
-          <div class="knob-unit" data-filter="stack">
-            <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Stack filter"></div></div>
-            <span class="knob-value"><span class="plate-txt">Stack</span><span class="readout readout--sm" data-out>All</span></span>
+          <div class="knob-unit" data-filter="type">
+            <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Type filter"></div></div>
+            <span class="knob-value"><span class="plate-txt">Type</span><span class="readout readout--sm" data-out>All</span></span>
           </div>
           <div class="knob-unit" data-filter="status">
             <div class="knob-face" style="width:132px;height:132px"><svg class="ticks" viewBox="0 0 132 132" aria-hidden="true"></svg><div class="knob" role="slider" tabindex="0" aria-label="Status filter"></div></div>
             <span class="knob-value"><span class="plate-txt">Status</span><span class="readout readout--sm" data-out>All</span></span>
           </div>
           <div class="filter-status">
-            <span class="knob-value"><span class="plate-txt">Showing</span><span class="readout readout--sm" id="count" aria-live="polite">05/05</span></span>
+            <span class="knob-value"><span class="plate-txt">Showing</span><span class="readout readout--sm" id="count" aria-live="polite">11/11</span></span>
             <button class="key key--light" type="button" id="reset">■ Reset</button>
           </div>
         </div>
 
         <div class="tiles" id="tiles">
 
-          <article class="tile" data-category="Marketing" data-stack="Django React" data-status="Live">
+          <article class="tile" data-category="Marketing" data-type="Tool" data-status="Live">
             <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
-            <div class="thumb" aria-hidden="true">
-              <svg viewBox="0 0 400 300">
-                <defs><radialGradient id="g1" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#D6D5D1"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
-                <ellipse cx="200" cy="250" rx="150" ry="14" fill="rgba(0,0,0,.08)"/>
-                <circle cx="160" cy="150" r="72" fill="none" stroke="url(#g1)" stroke-width="22"/>
-                <circle cx="240" cy="150" r="72" fill="none" stroke="#5C5B55" stroke-width="22"/>
-              </svg>
-            </div>
+            <div class="thumb thumb--shot"><img src="/images/projects/urlforge.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of URLForge.app"></div>
             <div class="tile-body">
-              <span class="label">Marketing · Django / React</span>
+              <span class="label">Marketing · Tool</span>
               <h3 class="title-m">URLForge.app</h3>
               <p>URL parameter builder for marketing teams, with AI-assisted campaign naming.</p>
               <div class="tile-foot">
                 <span class="plate">Live</span>
-                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://urlforge.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on URLForge (opens in new tab)</span></a></span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://urlforge.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on URLForge.app (opens in new tab)</span></a></span>
               </div>
             </div>
           </article>
-
-          <article class="tile" data-category="Finance" data-stack="React" data-status="Live">
+          <article class="tile" data-category="Finance" data-type="App" data-status="Live">
             <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
-            <div class="thumb" aria-hidden="true">
-              <svg viewBox="0 0 400 300">
-                <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#C9C8C4"/></linearGradient></defs>
-                <ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/>
-                <rect x="96" y="80" width="56" height="170" rx="4" fill="url(#g2)" stroke="#A3A29D"/>
-                <rect x="172" y="130" width="56" height="120" rx="4" fill="url(#g2)" stroke="#A3A29D"/>
-                <rect x="248" y="184" width="56" height="66" rx="4" fill="#5C5B55"/>
-              </svg>
-            </div>
+            <div class="thumb thumb--shot"><img src="/images/projects/planning.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of PlanningPlus.app"></div>
             <div class="tile-body">
-              <span class="label">Finance · React</span>
+              <span class="label">Finance · App</span>
               <h3 class="title-m">PlanningPlus.app</h3>
               <p>Debt payoff calculator with amortization charts.</p>
               <div class="tile-foot">
                 <span class="plate">Live</span>
-                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://planningplus.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PlanningPlus (opens in new tab)</span></a></span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://planningplus.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PlanningPlus.app (opens in new tab)</span></a></span>
               </div>
             </div>
           </article>
-
-          <article class="tile" data-category="AI" data-stack="Python" data-status="Open source">
+          <article class="tile" data-category="AI" data-type="App" data-status="Live">
             <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
-            <div class="thumb" aria-hidden="true">
-              <svg viewBox="0 0 400 300">
-                <defs><radialGradient id="g3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
-                <ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/>
-                <path d="M90 246 A110 110 0 0 1 310 246 Z" fill="url(#g3)" stroke="#A3A29D"/>
-                <circle cx="200" cy="96" r="40" fill="#5C5B55"/>
-              </svg>
-            </div>
+            <div class="thumb" aria-hidden="true"><svg viewBox="0 0 400 300"><defs><radialGradient id="g3" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs><ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/><circle cx="200" cy="146" r="100" fill="url(#g3)" stroke="#A3A29D"/><circle cx="200" cy="146" r="64" fill="none" stroke="#A3A29D" stroke-width="2"/><circle cx="200" cy="146" r="28" fill="none" stroke="#A3A29D" stroke-width="2"/><circle cx="246" cy="112" r="14" fill="#1C1C1A"/></svg></div>
             <div class="tile-body">
-              <span class="label">AI · Python</span>
+              <span class="label">AI · App</span>
+              <h3 class="title-m">AI Visibility Tracker</h3>
+              <p>Monitors how AI assistants describe a brand. Lives at ai.kitsap.app.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://ai.kitsap.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on AI Visibility Tracker (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="AI" data-type="Tool" data-status="Demo">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true"><svg viewBox="0 0 400 300"><defs><radialGradient id="g4" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs><ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/><circle cx="200" cy="146" r="96" fill="url(#g4)" stroke="#A3A29D"/><circle cx="200" cy="146" r="34" fill="#1C1C1A"/></svg></div>
+            <div class="tile-body">
+              <span class="label">AI · Tool</span>
+              <h3 class="title-m">Chatbot tester</h3>
+              <p>Playwright-driven AI chatbot tester with agent verification and a results report.</p>
+              <div class="tile-foot">
+                <span class="plate">Demo</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="/chatbot_results/report.html" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on Chatbot tester (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="AI" data-type="Tool" data-status="Open source">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb" aria-hidden="true"><svg viewBox="0 0 400 300"><defs><radialGradient id="g5" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs><ellipse cx="200" cy="252" rx="140" ry="12" fill="rgba(0,0,0,.08)"/><path d="M90 246 A110 110 0 0 1 310 246 Z" fill="url(#g5)" stroke="#A3A29D"/><circle cx="200" cy="96" r="40" fill="#5C5B55"/></svg></div>
+            <div class="tile-body">
+              <span class="label">AI · Tool</span>
               <h3 class="title-m">ChatRank</h3>
               <p>Measures how visible brands and competitors are in AI search answers.</p>
               <div class="tile-foot">
@@ -695,45 +708,81 @@
               </div>
             </div>
           </article>
-
-          <article class="tile" data-category="AI" data-stack="Python" data-status="Demo">
+          <article class="tile" data-category="Finance" data-type="App" data-status="Live">
             <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
-            <div class="thumb" aria-hidden="true">
-              <svg viewBox="0 0 400 300">
-                <defs><radialGradient id="g4" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#E6E6E3"/><stop offset="1" stop-color="#A3A29D"/></radialGradient></defs>
-                <ellipse cx="200" cy="254" rx="120" ry="12" fill="rgba(0,0,0,.08)"/>
-                <circle cx="200" cy="146" r="96" fill="url(#g4)" stroke="#A3A29D"/>
-                <circle cx="200" cy="146" r="34" fill="#1C1C1A"/>
-              </svg>
-            </div>
+            <div class="thumb thumb--shot"><img src="/images/projects/invoice.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of Simple Invoice"></div>
             <div class="tile-body">
-              <span class="label">AI · Python / Playwright</span>
-              <h3 class="title-m">Chatbot tester</h3>
-              <p>Playwright-driven AI chatbot tester with agent verification and a results report.</p>
+              <span class="label">Finance · App</span>
+              <h3 class="title-m">Simple Invoice</h3>
+              <p>A simple invoicing app from People from .Space.</p>
               <div class="tile-foot">
-                <span class="plate">Demo</span>
-                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="/chatbot_results/report.html" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on chatbot tester report (opens in new tab)</span></a></span>
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://invoices.peoplefrom.space" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on Simple Invoice (opens in new tab)</span></a></span>
               </div>
             </div>
           </article>
-
-          <article class="tile" data-category="Creative" data-stack="WebGL" data-status="In dev">
+          <article class="tile" data-category="Agency" data-type="Website" data-status="Live">
             <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
-            <div class="thumb" aria-hidden="true">
-              <svg viewBox="0 0 400 300">
-                <defs><radialGradient id="g5" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#8a8984"/><stop offset=".6" stop-color="#3a3a36"/><stop offset="1" stop-color="#0E0E0D"/></radialGradient></defs>
-                <ellipse cx="200" cy="254" rx="120" ry="12" fill="rgba(0,0,0,.1)"/>
-                <circle cx="200" cy="146" r="96" fill="url(#g5)"/>
-                <circle cx="292" cy="70" r="20" fill="#fff" stroke="#A3A29D"/>
-              </svg>
-            </div>
+            <div class="thumb thumb--shot"><img src="/images/projects/pfs.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of PeopleFrom.Space"></div>
             <div class="tile-body">
-              <span class="label">Creative · WebGL</span>
+              <span class="label">Agency · Website</span>
               <h3 class="title-m">PeopleFrom.Space</h3>
-              <p>Brand and generative visuals for a future-facing creative studio.</p>
+              <p>Seattle digital marketing and development agency: search, social, analytics and web builds.</p>
               <div class="tile-foot">
-                <span class="plate">In dev</span>
+                <span class="plate">Live</span>
                 <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://peoplefrom.space" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PeopleFrom.Space (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="Design" data-type="Tool" data-status="Internal">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb thumb--shot"><img src="/images/projects/design.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of Visual Design Guide"></div>
+            <div class="tile-body">
+              <span class="label">Design · Tool</span>
+              <h3 class="title-m">Visual Design Guide</h3>
+              <p>Turns a set of visual references into a written design guide with palette, type, layout and tokens.</p>
+              <div class="tile-foot">
+                <span class="plate">Internal</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><span class="key key--off" aria-disabled="true">⏻ Internal</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="Marketing" data-type="Tool" data-status="Live">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb thumb--shot"><img src="/images/projects/pdf.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of PDF SEO Optimizer"></div>
+            <div class="tile-body">
+              <span class="label">Marketing · Tool</span>
+              <h3 class="title-m">PDF SEO Optimizer</h3>
+              <p>Checks and fixes PDF titles, descriptions and metadata for search, right in the browser.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://pdf.peoplefrom.space" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on PDF SEO Optimizer (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="Agency" data-type="Website" data-status="Live">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb thumb--shot"><img src="/images/projects/kitsap.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of Kitsap.app"></div>
+            <div class="tile-body">
+              <span class="label">Agency · Website</span>
+              <h3 class="title-m">Kitsap.app</h3>
+              <p>Websites, apps, analytics and SEO for Kitsap County businesses.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://kitsap.app" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on Kitsap.app (opens in new tab)</span></a></span>
+              </div>
+            </div>
+          </article>
+          <article class="tile" data-category="Finance" data-type="Website" data-status="Live">
+            <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+            <div class="thumb thumb--shot"><img src="/images/projects/medpro.jpg" width="960" height="720" loading="lazy" decoding="async" alt="Screenshot of medpro.finance"></div>
+            <div class="tile-body">
+              <span class="label">Finance · Website</span>
+              <h3 class="title-m">medpro.finance</h3>
+              <p>Money calculators and plain-English guides for healthcare workers, with embeddable tools.</p>
+              <div class="tile-foot">
+                <span class="plate">Live</span>
+                <span class="power"><span class="led" aria-hidden="true"></span><a class="key" href="https://medpro.finance" target="_blank" rel="noopener">⏻ Power<span class="sr-only"> on medpro.finance (opens in new tab)</span></a></span>
               </div>
             </div>
           </article>
@@ -811,9 +860,9 @@
     var pad = function (n, w) { return String(n).padStart(w || 2, '0'); };
     $('#year').textContent = new Date().getFullYear();
 
-    /* ---------- Years of experience (since Nov 2012) ---------- */
-    var start = new Date(2012, 10, 1), now = new Date();
-    var yrs = now.getFullYear() - start.getFullYear() - (now < new Date(now.getFullYear(), 10, 1) ? 1 : 0);
+    /* ---------- Years of experience (since Mar 2008) ---------- */
+    var start = new Date(2008, 2, 1), now = new Date();
+    var yrs = now.getFullYear() - start.getFullYear() - (now < new Date(now.getFullYear(), 2, 1) ? 1 : 0);
     $('#years').textContent = pad(yrs, 3);
     $('#years').setAttribute('aria-label', yrs + ' years');
 
@@ -954,9 +1003,20 @@
         p: ['Managed 20+ clients with over $1.3M a month in PPC spend.',
             'Launched AdWords, Bing, Facebook and call-tracking programs.',
             'Designed a bid management strategy that ran accurately for two years.'],
-        tags: ['PPC', 'Attribution', 'Bid management'] }
+        tags: ['PPC', 'Attribution', 'Bid management'] },
+      { y: 2010, t: 'eCommerce Customer Acquisition Specialist', c: 'Wolverine World Wide', d: 'Aug 2010 – Aug 2012',
+        p: ['Managed search, affiliate, comparison shopping and banner programs for the ecommerce retail group.',
+            'Ran the Amazon store, led product feed development and streamlined internal Amazon customer service.',
+            'Built social campaigns, Facebook apps and Facebook advertising with Merrell, Hush Puppies, Wolverine, Chaco and Cat Footwear.'],
+        tags: ['SEM', 'Affiliate', 'Amazon', 'Facebook Ads'] },
+      { y: 2008, t: 'Digital Marketing Search Specialist', c: 'Meijer', d: 'Mar 2008 – Aug 2010',
+        p: ['Improved SEM and SEO for the ecommerce retail organization.',
+            'Built infrastructure that tied together product feeds, comparison shopping engines, affiliate marketing and automated search ads.',
+            'Grew into managing search for the whole company, all 200 stores, including navigation systems and local SEO listings.'],
+        tags: ['SEM', 'SEO', 'Product feeds', 'Local SEO'] }
     ];
     var N = roles.length;
+    $('#fader-cap').setAttribute('aria-valuemax', N - 1);
 
     // Plain list fallback
     $('#exp-list').innerHTML = roles.map(function (r) {
@@ -1035,7 +1095,7 @@
       var key = unit.getAttribute('data-filter');
       var opts = ['All'];
       tiles.forEach(function (t) {
-        var vals = key === 'stack' ? t.dataset[key].split(' ') : [t.dataset[key]];
+        var vals = [t.dataset[key]];
         vals.forEach(function (v) { if (opts.indexOf(v) < 0) opts.push(v); });
       });
       var out = $('[data-out]', unit), el = $('.knob', unit), svg = $('svg.ticks', unit);
@@ -1052,7 +1112,7 @@
       tiles.forEach(function (t) {
         var ok = Object.keys(filterState).every(function (k) {
           var want = filterState[k]; if (want === 'All') return true;
-          return (k === 'stack' ? t.dataset[k].split(' ') : [t.dataset[k]]).indexOf(want) >= 0;
+          return t.dataset[k] === want;
         });
         t.hidden = !ok; if (ok) shown++;
       });
@@ -1062,6 +1122,7 @@
     function resetFilters() { knobs.forEach(function (k) { k.set(0); }); }
     $('#reset').addEventListener('click', resetFilters);
     $('#reset2').addEventListener('click', resetFilters);
+    applyFilters();
 
     /* ---------- Skills channel strip ---------- */
     $$('#strip .channel').forEach(function (ch) {
