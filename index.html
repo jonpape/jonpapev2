@@ -447,6 +447,8 @@
     .footer { position: relative; padding: 32px 0 48px; }
     .footer .row { display: flex; justify-content: space-between; gap: 24px; padding-top: 24px; }
     .footer .screw { top: auto; bottom: 16px; }
+    .footer .row a { text-underline-offset: 3px; }
+    .footer .row a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 
     .icon { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -833,6 +835,7 @@
       <hr class="groove">
       <div class="row">
         <span class="label">© <span id="year">2026</span> Jonathan Pape · Build JP-26.11</span>
+        <span class="label">Tempo and key data by <a href="https://getsongbpm.com">GetSongBPM</a></span>
         <a class="label" href="/archive/2026/">Previous site: 2026 archive</a>
       </div>
     </div>
